@@ -32,6 +32,9 @@ public class UserEntity {
 	@Column(name = "home_phone")
 	private String homePhone;
 
+	@Column(name = "role")
+	private String role;
+
 	@OneToMany(mappedBy = "user")
 	private List<AccountEntity> accounts;
 }

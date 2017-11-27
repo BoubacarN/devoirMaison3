@@ -10,7 +10,6 @@ import fr.ekinci.tutorialspringsecurityjwt.authentication.models.LoginResponse;
 import fr.ekinci.tutorialspringsecurityjwt.commons.models.Profile;
 import fr.ekinci.tutorialspringsecurityjwt.security.models.Session;
 import fr.ekinci.tutorialspringsecurityjwt.security.services.IJwtService;
-
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
@@ -29,7 +28,6 @@ import java.util.List;
 public class LoginServiceMock implements ILoginService {
 	private final static String LOG_HEADER = "[LOGIN][SERVICE]";
 
-	@Autowired
 	UserRepository userRepository;
 
 	public LoginServiceMock(UserRepository userRepository) {
@@ -38,7 +36,7 @@ public class LoginServiceMock implements ILoginService {
 
 	private  String host;
 	private  RestTemplate restTemplate;
-	private Mapper dozer;
+	private  Mapper dozer;
 	private  ObjectMapper mapper;
 	private  IJwtService jwtService;
 
@@ -61,8 +59,28 @@ public class LoginServiceMock implements ILoginService {
 	@Override
 	public LoginResponse login(LoginRequest loginRequest, String id) {
 
+		UserEntity userEntity= userRepository.eagerFetchUserById(Long.parseLong(id));
+		LoginResponse loginResponse;
 
-			LoginResponse loginResponse = LoginResponse.builder()
+		//j'essai de le connecté avec un user existant
+		if(userEntity.getId()!=null){
+
+			loginResponse = LoginResponse.builder()
+					.guid(Long.toString(userEntity.getId()))
+					.passwordExpired(false)
+					.profile(
+							Profile.builder()
+									.firstName(userEntity.getFirstName())
+									.lastName(userEntity.getLastName())
+									.email("toto.lennon@gmail.com")
+									//.role(userEntity.getRole())
+									.build()
+					)
+					.build();
+		}
+//mock si le client n'existe pas
+		else {
+			loginResponse = LoginResponse.builder()
 					.guid("MOCK_GUID")
 					.passwordExpired(false)
 					.profile(
@@ -74,7 +92,7 @@ public class LoginServiceMock implements ILoginService {
 									.build()
 					)
 					.build();
-
+		}
 		try {
 			loginResponse.setToken(
 					jwtService.sign(
