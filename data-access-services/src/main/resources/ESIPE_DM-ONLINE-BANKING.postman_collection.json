@@ -1,0 +1,153 @@
+{
+	"variables": [],
+	"info": {
+		"name": "[ESIPE][DM-ONLINE-BANKING]",
+		"_postman_id": "30f084b0-001a-cf7e-878e-fcbc022ce88a",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "localhost:25002/data-access/users",
+			"request": {
+				"url": "localhost:25002/data-access/users",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"address\": \"87 bd Jean-Jaures 75015 PARIS\",\n\t\"firstName\": \"Name\",\n\t\"lastName\": \"Last\",\n\t\"birthDate\": \"1960-01-01\", \n\t\"cellPhone\": \"0669696969\",\n\t\"homePhone\": \"0169696969\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:25002/data-access/account-types",
+			"request": {
+				"url": "localhost:25002/data-access/account-types",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\" : \"Livret Jeune\",\n\t\"shortName\": \"J\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:25002/data-access/accounts",
+			"request": {
+				"url": "localhost:25002/data-access/accounts",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"user\": {\n\t\t\"id\": 1\n\t},\n\t\"type\": {\n\t\t\"id\": 1\n\t},\n\t\"amount\": 0\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:25002/data-access/transactions/credit/users/1",
+			"request": {
+				"url": "localhost:25002/data-access/transactions/credit/users/1",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"account\": {\n\t\t\"id\": \"1\"\n\t},\n\t\"type\": \"CREDIT\",\n\t\"amount\": \"1\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:25002/data-access/transactions/debit/users/1",
+			"request": {
+				"url": "localhost:25002/data-access/transactions/debit/users/1",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"account\": {\n\t\t\"id\": \"1\"\n\t},\n\t\"type\": \"DEBIT\",\n\t\"amount\": \"1\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:25002/data-access/users",
+			"request": {
+				"url": "localhost:25002/data-access/users",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:25002/data-access/users/1",
+			"request": {
+				"url": "localhost:25002/data-access/users/1",
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"1\",\n    \"lastName\": \"Last AAA\",\n    \"firstName\": \"Name AAA\",\n    \"address\": \"87 bd Jean-Jaures 75015 PARIS AAA\",\n    \"cellPhone\": \"0669696969 AAA\",\n    \"homePhone\": \"0169696969 AAA\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:25002/data-access/transactions/user/1",
+			"request": {
+				"url": "localhost:25002/data-access/transactions/user/1",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
